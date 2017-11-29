@@ -2,4 +2,6 @@ Temp
 Library
 apk
 ab
-.csproj
+*.csproj
+*.vs
+*.sln
