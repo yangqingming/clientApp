@@ -42,7 +42,7 @@ namespace UnityGameFramework.Runtime
             }
             else
             {
-                SceneManager.UnloadSceneAsync(sceneAssetName);
+                SceneManager.UnloadSceneAsync(SceneComponent.GetSceneName(sceneAssetName));
             }
 #else
             if (SceneManager.UnloadScene(SceneComponent.GetSceneName(sceneAssetName)))
@@ -109,23 +109,20 @@ namespace UnityGameFramework.Runtime
             WWW www = new WWW(fileUri);
             yield return www;
 
-            if (www.isDone)
-            {
-                byte[] bytes = www.bytes;
-                string errorMessage = www.error;
-                www.Dispose();
+            byte[] bytes = www.bytes;
+            string errorMessage = www.error;
+            www.Dispose();
 
-                if (loadBytesCallback != null)
-                {
-                    loadBytesCallback(fileUri, bytes, errorMessage);
-                }
+            if (loadBytesCallback != null)
+            {
+                loadBytesCallback(fileUri, bytes, errorMessage);
             }
         }
 
 #if UNITY_5_5_OR_NEWER
         private IEnumerator UnloadSceneCo(string sceneAssetName, UnloadSceneCallbacks unloadSceneCallbacks, object userData)
         {
-            AsyncOperation asyncOperation = SceneManager.UnloadSceneAsync(sceneAssetName);
+            AsyncOperation asyncOperation = SceneManager.UnloadSceneAsync(SceneComponent.GetSceneName(sceneAssetName));
             if (asyncOperation == null)
             {
                 yield break;

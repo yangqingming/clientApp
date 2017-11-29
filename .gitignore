@@ -2,6 +2,7 @@ Temp
 Library
 apk
 ab
+UnityPackageManager
 *.csproj
 *.vs
 *.sln
