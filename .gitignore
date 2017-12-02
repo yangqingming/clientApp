@@ -1,8 +1,8 @@
-Temp
-Library
-apk
-ab
-UnityPackageManager
+/Temp
+/Library
+/apk
+/ab
+/UnityPackageManager
 *.csproj
 *.vs
 *.sln
