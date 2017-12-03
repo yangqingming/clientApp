@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<UnityGameFramework>
+  <AssetBundleCollection>
+    <AssetBundles>
+      <AssetBundle Name="Models/chuxinzhe_01/chuxinzhe_01" LoadType="0" Packed="False" />
+      <AssetBundle Name="Models/chuxinzhe_01/chuxinzhe_02" LoadType="0" Packed="False" />
+      <AssetBundle Name="Models/chuxinzhe_01/chuxinzhe_03" LoadType="0" Packed="False" />
+      <AssetBundle Name="Models/chuxinzhe_01/Materials/chuxinzhe_01" LoadType="0" Packed="False" />
+      <AssetBundle Name="Models/chuxinzhe_01/Materials/weapon" LoadType="0" Packed="False" />
+      <AssetBundle Name="Models/chuxinzhe_01/Materials/xinshou_01" LoadType="0" Packed="False" />
+      <AssetBundle Name="Models/Prefabs/chuxinzhe_01" LoadType="0" Packed="False" />
+      <AssetBundle Name="Models/Prefabs/chuxinzhe_02" LoadType="0" Packed="False" />
+      <AssetBundle Name="Models/Prefabs/chuxinzhe_03" LoadType="0" Packed="False" />
+    </AssetBundles>
+    <Assets>
+      <Asset Guid="0fa9839dc5d66694dbfc71af7c0ffdd2" AssetBundleName="Models/chuxinzhe_01/chuxinzhe_01" />
+      <Asset Guid="14fa0e43329518a4fb520904dc15fcd9" AssetBundleName="Models/chuxinzhe_01/chuxinzhe_03" />
+      <Asset Guid="2e559fd417d31b144baf766ffdfae07f" AssetBundleName="Models/chuxinzhe_01/chuxinzhe_02" />
+      <Asset Guid="62ada8ae92e3aa140ad55d0668e5f660" AssetBundleName="Models/chuxinzhe_01/chuxinzhe_01" />
+      <Asset Guid="90bfb7e4d00e3bd438e2716d352fa043" AssetBundleName="Models/chuxinzhe_01/Materials/chuxinzhe_01" />
+      <Asset Guid="9ef807c704cf3444aa6f3c166e98dc89" AssetBundleName="Models/chuxinzhe_01/Materials/weapon" />
+      <Asset Guid="c5c60ae3684b0cd45af6b0b1a168bdb1" AssetBundleName="Models/chuxinzhe_01/Materials/xinshou_01" />
+      <Asset Guid="d73116a36c53c8e48b4cf67a3e4c4671" AssetBundleName="Models/chuxinzhe_01/Materials/chuxinzhe_01" />
+      <Asset Guid="ddbec34b1fbdf234d9979b7b8e7a0559" AssetBundleName="Models/chuxinzhe_01/Materials/weapon" />
+      <Asset Guid="e6f0faf17fbcd924e9cede0f8f061960" AssetBundleName="Models/Prefabs/chuxinzhe_01" />
+      <Asset Guid="f914a9e6804f14246839dfc904756a26" AssetBundleName="Models/Prefabs/chuxinzhe_03" />
+      <Asset Guid="fb0d683c0e586ad49a14ce1c87ff697d" AssetBundleName="Models/Prefabs/chuxinzhe_02" />
+    </Assets>
+  </AssetBundleCollection>
+</UnityGameFramework>
