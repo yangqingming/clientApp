@@ -13,6 +13,7 @@ public static class GameFrameworkConfigs
     [AssetBundleEditorConfigPath]
     public static string AssetBundleEditorConfig = Application.dataPath + "/ClientApp/Configs/AssetBundleEditor.xml";
 
+
     [AssetBundleCollectionConfigPath]
     public static string AssetBundleCollectionConfig = Application.dataPath + "/ClientApp/Configs/AssetBundleCollection.xml";
 }
