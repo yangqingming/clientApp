@@ -11,7 +11,6 @@ public class ProcedureMain : ProcedureBase
 {
     protected override void OnEnter(ProcedureOwner procedureOwner)
     {
-
         ClientApp.Event.Subscribe(ShowEntitySuccessEventArgs.EventId, OnShowEntitySuccess);
         ClientApp.Event.Subscribe(ShowEntityFailureEventArgs.EventId, OnShowEntityFail);
         ClientApp.Entity.ShowEntity<MyEntity>(0, AssetUtility.GetModelsPath("chuxinzhe_01"), "Actor", this);
