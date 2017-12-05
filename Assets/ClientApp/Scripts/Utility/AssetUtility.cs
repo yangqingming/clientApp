@@ -7,4 +7,9 @@ public static class AssetUtility {
     {
         return string.Format("Assets/ClientApp/BuildResources/Models/Prefabs/{0}.prefab", assetName);
     }
+
+    public static string GetLuaScriptsPath(string assetName)
+    {
+        return string.Format("Assets/ClientApp/BuildResources/LuaScripts/{0}.lua.txt", assetName);
+    }
 }
