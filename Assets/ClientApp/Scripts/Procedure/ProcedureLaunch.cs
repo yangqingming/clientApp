@@ -17,7 +17,7 @@ public class ProcedureLaunch : ProcedureBase
         base.OnUpdate(procedureOwner, elapseSeconds, realElapseSeconds);
 
         if (ClientApp.Base.EditorResourceMode)
-            ChangeState<ProcedureMain>(procedureOwner);
+            ChangeState<ProcedureLaunchLuaScripts>(procedureOwner);
         else
             ChangeState<ProcedureUpdate>(procedureOwner);
     }
