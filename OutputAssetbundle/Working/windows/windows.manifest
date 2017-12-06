@@ -1,9 +1,9 @@
 ManifestFileVersion: 0
-CRC: 4089379026
+CRC: 2333420543
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: luascripts/_
+      Name: luascripts
       Dependencies: {}
     Info_1:
       Name: models/chuxinzhe_01/chuxinzhe_01

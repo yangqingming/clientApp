@@ -1,1 +1,412 @@
---main.lua
+--main
+
+local a = SystemTime.RunTime;
+TDDebug.Log("main start: " .. SystemTime.RunTime)
+
+Language = "cn";
+only_client = GameMain.ignoreUpdate;--false是连线. true是单机版
+g_runtime_platform = SystemWraper.GetPlateform();
+gm_enable = true;
+
+
+system_time = 0; --真实时间
+RunTime = 0; --压缩时间
+math.randomseed(os.time()); --不重复随机数种子
+math.random(0, 100);
+
+local function game_update()
+    system_time = SystemTime.RunTime;
+    -- glog("SystemTime.RunTime: " .. SystemTime.RunTime)
+    RunTime = SystemTime.time;
+    net_mgr.update()
+    scene_mgr.run();
+    ui_mgr.update();
+end
+
+local packName = {
+    ["com.tencent.tmgp.czk.elts.cn"] = true,
+    ["com.czk.elts.cn"] = true,
+}
+
+function IsShare()
+    if g_runtime_platform == "Android" then
+		if packName[SystemWraper.GetIdentifier()] == true then
+			return true;
+		else
+			return false;
+		end
+	end
+    return true;
+end
+
+function IsiOSChechState()
+    --do return true; end;
+    if g_runtime_platform == "IPhonePlayer" then
+        local v = update.server_info.platform_server_list[GameMain.clientVersion];
+        if "CHECK_STATE" == v then
+            return true;
+        else
+            return false;
+        end
+    end
+    return false;
+end
+
+local function keydown(key)
+    if GameMain.IsDebug() then
+        if ui_mgr.check_open("gm_ui") then
+            return;
+        end
+        scene_mgr.keydown(key);
+        ui_mgr.keydown(key); 
+    end
+    if key == KeyCode.Escape then
+        ui_mgr.back();
+    end
+end
+
+local function on_application_fucos(isfocus)
+    if isfocus == true then --回到了游戏
+        glog("===== on_application_fucos 回到了游戏")
+        SendGameEvent(game_event.on_application_fucos, true);
+    else --按了home键盘 离开了游戏
+        glog("on_application_fucos 离开了游戏")
+        SendGameEvent(game_event.on_application_fucos, false);
+    end
+end
+
+game_systemtime = 1.0;
+function Game_TimeScale(time)
+    if type(time) ~= "number" then
+        return;
+    end
+    game_systemtime = time;
+    SystemTime.TimeScale = game_systemtime;
+end
+
+function game_pause(is_pause)
+    if is_pause then
+        if SystemTime.TimeScale == 0.0 then
+            return;
+        end
+        game_systemtime = SystemTime.TimeScale;
+        SystemTime.TimeScale = 0.0;
+    else
+        SystemTime.TimeScale = game_systemtime;
+    end
+end
+
+function SendGameEvent(event, ...)
+    msg_mgr.event(event, ...);
+    ui_mgr.send_ui_event(event, ...);
+    scene_mgr.send_scene_event(event, ...);
+end
+
+--脚本开始执行 所有require 全局应该写在这个函数内
+function ScriptStart()
+    require("class");
+    require("queue");
+    require("keycode");
+    require("util/util");
+    require("manager/game_event");
+    require("manager/property_calc");
+    require("api/base_lang_api");
+    require("ui/uibase");
+    require("scene/base_scene");
+    require("actor/actor_type");
+    require("actor/base_actor");
+    require("skill/skill_ai");
+    require("skill/base_skill");
+    require("buff/buff_ai");
+    require("buff/base_buff");
+    require("buff/buff_trigger");
+    require("manager/skill_mgr");
+    --require("manager/buff_mgr");
+    require("manager/make_name");
+    require("manager/damage_calc");
+    require("manager/effect_mgr");
+    require("manager/audio_mgr");
+    require("manager/ui_mgr");
+    require("manager/scene_mgr");
+    require("manager/config_mgr");
+   
+    require("manager/net_mgr");
+    require("message/base_msg");
+    require("manager/msg_mgr");
+    require("manager/jump_to_ui");
+    require("api/event_api");
+    require("manager/red_check");
+    require("manager/pet_adventure_group");
+    require("manager/open_system");
+
+    -- local mk = require("manager/WarnStrFunc").new();
+    -- mk:offlineMake();
+    local cls = require("manager/WarnStrFunc_Mgr");
+    WarnStrFunc = cls.new();
+    msg_mgr.init(); --消息初始化
+    scene_mgr.init();
+    ui_mgr.init();
+    GameMain.OnUpdate = game_update;
+    GameMain.KeyCallBack = keydown;
+    GameMain.appfocus_callback = on_application_fucos;
+    pet_adventure_group.init();
+    scene_mgr.change_scene("login_scene");
+
+    -- -- --创建网络
+    -- -- net_mgr.creat();
+    -- --每3分钟清理下资源池
+ local interval = 1000 * 60 * 3;
+    if g_runtime_platform == "IPhonePlayer" then
+        interval = 1000  * 60
+    end 
+    LuaTimer.Add(1000 * 60 * 1, interval, function() 
+        --local used = collectgarbage("count");
+        --glog("Lua mem: "..used);
+        collectgarbage("collect");
+        GameMain.GetInstance():Gc();
+        --LuaTimer.Add(1000, 0, function()  end)
+    end)
+    
+end
+
+local login_type = "test"; -- channel 渠道 test 内部测试
+if not GameMain.IsDebug() then
+    login_type = "channel";
+end
+
+function ReStart()
+    GameMain.GetInstance():ReStart();
+end
+
+local golist = {};
+local function Test()
+    require("util/util");
+    local model_stencil = require("data/model_stencil");
+    local ui_test_stencil = require("data/ui_test_stencil");
+    local effect_stencil = require("data/effect_stencil");
+    local keylist = util.get_table_keys(model_stencil);
+    
+    local eff_keylist = util.get_table_keys(effect_stencil);
+    local index = 1;
+
+    --反复加载角色资源
+    -- LuaTimer.Add(1000,1000,
+    --     function()
+    --         local num = math.random( 1, 5);
+    --         for i = 1, num do
+    --             if index > #keylist then
+    --                 index = 1;
+    --             end
+    --             local model_id = keylist[index];        
+    --             local model = model_stencil[model_id];
+    --             if #golist > 20 then
+    --                 golist[1]:Destroy();
+    --                 table.remove(golist, 1);
+    --             end
+    --             if model.model ~= "" then
+    --                 ActorWraper.Create(model.model, model.scale,
+    --                     function(go)
+    --                         golist[#golist + 1] = go;                    
+    --                     end
+    --                 );
+    --             end
+    --             index = index + 1;
+    --         end
+    --     end
+    -- )
+
+    -- 反复加载UI资源
+    -- LuaTimer.Add(1000,3000,
+    --     function()
+    --         if index > #ui_test_stencil then
+    --             index = 1;
+    --         end
+    --         local uiname = ui_test_stencil[index].name;
+    --         if #golist > 15 then
+    --             golist[1]:Release();
+    --             table.remove(golist, 1);
+    --             GameMain.GetInstance():Gc();
+    --             collectgarbage("collect");
+    --         end
+    --         TDDebug.Log("load UI: "..uiname);
+    --         NGUIWraper.Load(uiname, 
+    --             function(o)
+    --                 golist[#golist + 1] = o;
+    --             end
+    --         )
+    --         index = index + 1;
+    --     end
+    -- )
+
+
+    -- FileUpdateUI.Instance:Hide();
+    -- TDDebug.Log("特效表中配置的数量："..#eff_keylist);
+    -- LuaTimer.Add(1000, 1000,
+    --     function()
+    --         if index > #eff_keylist then
+    --             index = 1;
+    --         end
+    --         local model_id = eff_keylist[index];
+    --         local effect = effect_stencil[model_id];
+    --         TDDebug.Log("Index: "..index.." Load effect: "..effect.name.." id: "..model_id);
+    --         if Codes.FileUtil.FileExistInPackage("assetbundles/effect/"..effect.name..".ios") then
+    --             EffectWraper.Create(effect.name, effect.type, {0,0,0} ,{100, 0, 50}, nil, "", nil, "", 1, 2, 1, nil , 0, 0);
+    --         else
+    --             TDDebug.Error(effect.name .." is not exist!");
+    --         end
+    --         index = index + 1;
+    --         collectgarbage("collect");
+    --         GameMain.GetInstance():Gc();
+    --     end
+    -- )
+
+    LuaTimer.Add(1000, 1000 * 60, function() 
+        collectgarbage("collect");
+        LuaTimer.Add(1000, 0, function() GameMain.GetInstance():Gc(); end)
+    end)
+end
+
+function main()
+    AssetBundleManage.GetInstance().InitComplete = function() --资源加载管理初始化完成
+        --Test();
+        ScriptStart();
+    end
+    AssetBundleManage.GetInstance():Init();
+    update.login_ip = update.server_info.login_ip[login_type];
+    if update.login_ip == nil then
+        TDDebug.Error("登录服务器ip错误");
+    end    
+end
+
+local share_atlas = {public_atlas = true, combat_atlas = true, icon_atlas = true, font = true, guide_atlas = true, shop_background = true, chart_atlas = true, summon_background = true};
+function IsPublicAtlas(atlas_name)
+    return share_atlas[atlas_name];
+end
+
+
+function ios_pay(Product_id, Only_id, pid, stime)
+    local delay = 0;
+    if GameMain.IsDebug() then
+        delay = 30 * 1000;
+    end
+    return LuaTimer.Add(delay, 30 * 1000, 
+    function()
+        glog("请求服务器发货")
+        local server_list = update.server_info.platform_server_list[GameMain.clientVersion];
+        -- if GameMain.IsDebug() then
+        --     server_list = "CHECK_STATE";
+        -- end
+        msg_mgr.get_msg("msg_pay"):req_pay_checked(Product_id, server_list, pid.."_"..stime);
+    end);
+end
+
+function restore_ios_payment()
+    if not g_runtime_platform == "IPhonePlayer" then
+        return;
+    end
+    local pid = msg_mgr.get_msg("msg_player"):get_player_pid();
+    local filename = "iOS".."_"..pid..".pay";
+    if Codes.FileUtil.FileExistInWritePath(filename) then
+        local filecontent = ConfigManager.GetInstance():LoadFile(filename);
+        if g_ios_restore_pay ~= nil then
+            for k, v in pairs(g_ios_restore_pay) do
+                if v ~= nil then
+                    local ret = LuaTimer.Delete(v.Timer_id);
+                    glog("定时器删除结果： "..tostring(ret));
+                end
+            end
+        end
+        g_ios_restore_pay = util.unserialize(filecontent);  --反序列化聊天信息为table
+        glog("========检测恢复IOS充值，重新通知服务器发货============")
+        for k, v in pairs(g_ios_restore_pay) do
+            if v ~= nil then
+                glog("恢复订单：ProductID: "..v.Product_id.." onlyid: "..v.Only_id.." pid: "..v.pid.." stime: "..v.stime.." timerid: "..v.Timer_id);
+                v.Timer_id = ios_pay(v.Product_id, v.Only_id, v.pid, v.stime);
+            end
+        end
+	end
+end
+
+--//参数 1 回执单  参数2 唯一id
+function IosProvideContent(Product_id, Only_id)
+    local pid = msg_mgr.get_msg("msg_player"):get_player_pid();
+    local stime = msg_mgr.get_msg("msg_time"):get_severtime();
+    if g_ios_restore_pay == nil then
+        g_ios_restore_pay = {};
+    end
+    g_ios_restore_pay[pid.."_"..stime] = {["Product_id"] = Product_id, ["Only_id"] = Only_id, ["pid"] = pid, ["stime"] = stime, ["Timer_id"] = 0};
+    glog("============收到iOS回执单===============")
+    g_ios_restore_pay[pid.."_"..stime].Timer_id = ios_pay(Product_id, Only_id, pid, stime);
+    local payInfo = util.serialize(g_ios_restore_pay);
+    ConfigManager.GetInstance():SaveFile("iOS".."_"..pid..".pay", payInfo);
+    glog("============iOS回执单存档完成===============")
+end
+
+function IosFailedTransaction()
+end
+
+function OnSdkLogout()
+    if scene_mgr.get_curr_scene().state == base_scene.enum_state.loading then
+		LuaTimer.Add(200,200,function() 
+			if scene_mgr.get_curr_scene().state ~= base_scene.enum_state.loading then
+				ui_mgr.close_all_ui();
+				scene_mgr.change_scene("login_scene");
+                msg_mgr.get_msg("msg_login"):login_out();
+				return false;
+			end
+		end)
+	else
+        LuaTimer.Add(100, 0, function() 
+            ui_mgr.close_all_ui();
+		    scene_mgr.change_scene("login_scene");
+            msg_mgr.get_msg("msg_login"):login_out();
+        end);
+	end
+end
+
+function OnHRGSDKLogout()
+    OnSdkLogout();
+end
+
+function OnYeSDKLogout()
+    -- LuaTimer.Add(100, 0, function() 
+    --     ui_mgr.close_all_ui();
+    --     scene_mgr.change_scene("login_scene");
+    --     msg_mgr.get_msg("msg_login"):login_out();
+    -- end);
+    OnSdkLogout();
+end
+
+function OnYeSDKPaySuccess(message)
+    
+end
+
+function OnGuluGamesSDKLogout( )
+ 	-- LuaTimer.Add(100, 0, function() 
+    --     ui_mgr.close_all_ui();
+    --     scene_mgr.change_scene("login_scene");
+    --     msg_mgr.get_msg("msg_login"):login_out();        
+    -- end);
+    OnSdkLogout();
+end
+
+function OnMSDKPayNeedLogin()
+    OnSdkLogout();
+end
+
+function getUILangString(id)
+    local lang3 = nil;
+    if Language == "cn" then
+        lang3 = require("lang/lang3_cn");
+    elseif Language == "en" then
+        lang3 = require("lang/lang3_en");
+    elseif Language == "tw" then
+        lang3 = require("lang/lang3_tw");
+    end
+    local lang = lang3[tonumber(id)];
+    if lang == nil then
+        return "[ff3737]error: " .. id;
+    end
+    return lang.lang;
+end
+--main();

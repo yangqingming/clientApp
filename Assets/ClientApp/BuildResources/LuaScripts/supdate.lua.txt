@@ -1,0 +1,159 @@
+--supdate.lua
+
+update = {};
+update.locate_ip = "eltsres.gulugames.cn";
+
+update.web_url = "http://"..update.locate_ip.."/"..GameMain.client_id.."/";
+-- ------------------游戏服务器
+--update.game_server_info = {ip="192.168.2.77",port=9997,}--傅黎
+--update.game_server_info = {ip="192.168.2.22",port=9997,}-- 陈波
+--update.game_server_info = {ip="192.168.2.201",port=9997,}-- 内网
+--update.game_server_info = {ip="115.159.205.141",port=9997,}-- 广电过审
+--update.game_server_info = {ip="118.89.16.110",port=9997,} --给发行方看的
+
+update.game_server_info = {};
+
+update.http_header = "http://";
+update.https_header = "https://";
+
+update.market_type = 1; -- 呵呵,没用的东西, 还记得大明湖畔的D3么.
+
+update.payment = "applepay"; --ios下走苹果支付还是爱呗支付（applepay ipppay）;
+
+TDDebug.Log("请求连接web服务器:"..update.web_url);
+
+FileUpdateUI.Instance:SetVersion("ver" .. GameMain.clientVersion)
+
+local server_info_url = update.web_url.."resources/win/".."server_info.lua?"..tostring(SystemTime.NowMillisecond); --默认windows路径
+g_runtime_platform = SystemWraper.GetPlateform();
+if g_runtime_platform == "IPhonePlayer" then
+    server_info_url = update.web_url.."resources/ios/".."server_info.lua?"..tostring(SystemTime.NowMillisecond);
+elseif g_runtime_platform == "Android" then
+    server_info_url = update.web_url.."resources/and/".."server_info.lua?"..tostring(SystemTime.NowMillisecond);
+end
+
+local function split(str, delim, maxNb)
+    if type(str) == "table" then
+        return str;
+    end
+    if delim == nil then
+        delim = " "
+    end
+    --去掉配置表末尾的错误符号
+    local nLen = string.len(str);
+    while( nLen > 1 ) do
+        if string.sub(str,-1) ~= delim or string.sub(str,-1) ~= " " then
+            break;
+        end
+        if string.sub(str,-1) == delim or string.sub(str,-1) == " " then
+            str = string.sub(str,1,-2);
+            nLen = nLen - 1;
+        end
+    end
+
+    while(nLen > 1) do
+        if string.sub(str, 1, 1) ~= delim then
+            break;
+        end
+        if string.sub(str, 1, 1) == delim then
+            str = string.sub(str, 2, -1);
+            nLen = nLen - 1;
+        end
+    end
+
+    if string.find(str, delim) == nil then
+        return { str }
+    end
+    if maxNb == nil or maxNb < 1 then
+        maxNb = 0
+    end
+    local result = {}
+    local pat = "(.-)" .. delim .. "()"
+    local nb = 0
+    local lastPos
+    for part, pos in string.gfind(str, pat) do
+        nb = nb + 1
+        result[nb] = part
+        lastPos = pos
+        if nb == maxNb then break end
+    end
+    if nb ~= maxNb then
+        result[nb + 1] = string.sub(str, lastPos)
+    end
+    return result
+end
+
+local function FinishDown(ver)
+    FileUpdateUI.Instance:SetVersion("ver" .. GameMain.clientVersion .. " " .. ver)
+    SystemWraper.FinishDown();
+    --这里初始化filelist 进入main函数 结束更新流程 开始游戏逻辑
+    LuaManager.Instance:InitFileList();
+end
+
+function update.get_http_success(script)
+    TDDebug.Log(script);
+    td_server_info = loadstring("local " .. script .. "\nreturn td_server_info")();
+    update.server_info = td_server_info;
+
+ --   TDDebug.Log("登陆服务器地址："..td_server_info.login_ip);
+    -------------------------挂机测试服------------------------------
+    --update.login_ip = "115.159.224.189:8080";
+    ----------------------------------------------------------
+    -- 客户端版本验证
+    local version = GameMain.clientVersion;
+    TDDebug.Log("客户端版本号:"..version);
+    local check_version_name = td_server_info.patcher_version[version];
+    if check_version_name == nil then
+        if g_runtime_platform == "IPhonePlayer" then
+            local url = SystemWraper.GetEscapeURL(update.server_info.ios_down_url);
+            FileUpdateUI.Instance:versionError(url);
+        elseif g_runtime_platform == "Android" then
+            local para = SDKWraper.GetSDKChannelId();
+            TDDebug.Log("=======> " .. para);
+            local para_list = split(para, "@");
+            local url = "http://elts.gulugames.cn/dow.html?channel=%s&extra=%s";
+            url = string.format(url, para_list[2], para_list[1]);
+            TDDebug.Log("down url: " .. url);
+            FileUpdateUI.Instance:versionError(url);
+        else
+            FileUpdateUI.Instance:versionError("");
+        end
+        return;
+    else
+        PatcherUpdate.GetInstance().ServerVersionName = check_version_name;
+    end
+
+
+    TDDebug.Warn("下載服務器： "..td_server_info.file_server_url);
+
+    --设置更新服务器目录
+    PatcherUpdate.GetInstance().ServerRootUrl = td_server_info.file_server_url;
+    --设置更新完成的回调
+    PatcherUpdate.GetInstance().Complete = FinishDown;
+
+    --安装完成回调
+    PatcherUpdate.GetInstance().InstallComplete = function()
+        --检查更新
+        if PatcherUpdate.GetInstance().local_splitstep == "0" then
+            PatcherUpdate.GetInstance():CheckVersions(0);
+        else
+            PatcherUpdate.GetInstance():CheckVersions(1);
+        end
+    end
+
+    --检查安装
+    PatcherUpdate.GetInstance():InstallPackage();
+    --update.http_promptly(td_server_info.file_server_url);-- 配置文件更改为链接地址，而不只有ip
+    --ganalysis.set_analysis_url(td_server_info.analysis_url); 
+end
+
+
+function update.get_http_error(text)
+    if string.find(text,"404") ~= nil then
+        update.is_404_error = true;
+        FinishDown();
+    else
+        GameMain.HttpGetTextCall(server_info_url, update.get_http_success, update.get_http_error, true);
+    end
+end
+GameMain.HttpGetTextCall(server_info_url, update.get_http_success, update.get_http_error, true);

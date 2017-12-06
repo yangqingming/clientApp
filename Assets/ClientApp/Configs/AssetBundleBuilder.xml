@@ -16,7 +16,7 @@
       <ForceRebuildAssetBundleSelected>False</ForceRebuildAssetBundleSelected>
       <IgnoreTypeTreeChangesSelected>False</IgnoreTypeTreeChangesSelected>
       <AppendHashToAssetBundleNameSelected>False</AppendHashToAssetBundleNameSelected>
-      <ChunkBasedCompressionSelected>True</ChunkBasedCompressionSelected>
+      <ChunkBasedCompressionSelected>False</ChunkBasedCompressionSelected>
       <BuildEventHandlerTypeName>
       </BuildEventHandlerTypeName>
       <OutputDirectory>E:/projects/clientApp/OutputAssetbundle</OutputDirectory>

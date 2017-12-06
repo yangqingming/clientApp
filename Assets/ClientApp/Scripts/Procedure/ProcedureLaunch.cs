@@ -15,10 +15,21 @@ public class ProcedureLaunch : ProcedureBase
     protected override void OnUpdate(ProcedureOwner procedureOwner, float elapseSeconds, float realElapseSeconds)
     {
         base.OnUpdate(procedureOwner, elapseSeconds, realElapseSeconds);
-        ChangeState<ProcedureLaunchLuaScripts>(procedureOwner);
-        //if (ClientApp.Base.EditorResourceMode)
-        //    ChangeState<ProcedureLaunchLuaScripts>(procedureOwner);
-        //else
-        //    ChangeState<ProcedureUpdate>(procedureOwner);
+        if (ClientApp.Base.EditorResourceMode)
+        {
+            ChangeState<ProcedureLaunchLuaScripts>(procedureOwner);
+        }
+        else
+        {
+            if (ClientApp.Resource.ResourceMode == GameFramework.Resource.ResourceMode.Updatable) //更新模式
+            {
+                ChangeState<ProcedureUpdate>(procedureOwner);
+            }
+            else if (ClientApp.Resource.ResourceMode == GameFramework.Resource.ResourceMode.Package) //包内模式
+            {
+                ChangeState<ProcedurePackageInit>(procedureOwner);
+            }
+        }
+        
     }
 }

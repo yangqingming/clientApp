@@ -3,6 +3,7 @@
 /apk
 /ab
 /UnityPackageManager
+OutputAssetbundle/*
 *.csproj
 *.vs
 *.sln

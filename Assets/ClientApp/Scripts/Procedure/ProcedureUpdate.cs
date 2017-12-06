@@ -64,6 +64,7 @@ public class ProcedureUpdate : ProcedureBase {
                 }
             }
         };
+
         ClientApp.Resource.UpdatePrefixUri = "http://eltsres.gulugames.cn/test/windows/";
         ClientApp.WebRequest.AddWebRequest(url, _event);
     }

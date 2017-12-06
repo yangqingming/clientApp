@@ -1,0 +1,35 @@
+--queue.lua
+
+Queue = class();
+
+function Queue:ctor()
+	self.q = {};
+end
+
+function Queue:Enqueue(para)
+	if para == nil then return end
+
+	self.q[#self.q + 1] = para;
+end
+
+function Queue:Peek()
+	return self.q[1];
+end
+
+function Queue:Dequeue()
+	if #self.q < 1 then
+		return nil;
+	end
+
+	local para = self.q[1];
+	table.remove(self.q, 1);
+	return para;
+end
+
+function Queue:Count()
+	return #self.q;
+end
+
+function Queue:Clear()
+	self.q = {};
+end
