@@ -1,0 +1,19 @@
+ManifestFileVersion: 0
+CRC: 2572397587
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: b61c7164a3e1a3a9b1b0ac28c06dea15
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: b4c5a82347ebdfc04693c9733c20268d
+HashAppended: 0
+ClassTypes:
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+Assets:
+- Assets/ClientApp/BuildResources/Models/chuxinzhe_01/chuxinzhe_02.controller
+Dependencies:
+- E:/projects/clientApp/OutputAssetbundle/Working/windows/models/chuxinzhe_01/chuxinzhe_01

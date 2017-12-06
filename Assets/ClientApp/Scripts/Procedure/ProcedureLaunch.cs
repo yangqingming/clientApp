@@ -15,10 +15,10 @@ public class ProcedureLaunch : ProcedureBase
     protected override void OnUpdate(ProcedureOwner procedureOwner, float elapseSeconds, float realElapseSeconds)
     {
         base.OnUpdate(procedureOwner, elapseSeconds, realElapseSeconds);
-
-        if (ClientApp.Base.EditorResourceMode)
-            ChangeState<ProcedureLaunchLuaScripts>(procedureOwner);
-        else
-            ChangeState<ProcedureUpdate>(procedureOwner);
+        ChangeState<ProcedureLaunchLuaScripts>(procedureOwner);
+        //if (ClientApp.Base.EditorResourceMode)
+        //    ChangeState<ProcedureLaunchLuaScripts>(procedureOwner);
+        //else
+        //    ChangeState<ProcedureUpdate>(procedureOwner);
     }
 }

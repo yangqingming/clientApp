@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<UnityGameFramework>
+  <BuildReport>
+    <Summary>
+      <ProductName>test</ProductName>
+      <CompanyName>com.game.test</CompanyName>
+      <GameIdentifier>game.update.test</GameIdentifier>
+      <ApplicableGameVersion>1.0</ApplicableGameVersion>
+      <InternalResourceVersion>0</InternalResourceVersion>
+      <UnityVersion>2017.2.0f3</UnityVersion>
+      <WindowsSelected>True</WindowsSelected>
+      <MacOSXSelected>False</MacOSXSelected>
+      <IOSSelected>False</IOSSelected>
+      <AndroidSelected>False</AndroidSelected>
+      <WindowsStoreSelected>False</WindowsStoreSelected>
+      <ZipSelected>True</ZipSelected>
+      <RecordScatteredDependencyAssetsSelected>False</RecordScatteredDependencyAssetsSelected>
+      <BuildAssetBundleOptions>272</BuildAssetBundleOptions>
+    </Summary>
+    <AssetBundles Count="10">
+      <AssetBundle Name="luascripts/_" LoadType="0" Packed="True">
+        <Assets Count="2">
+          <Asset Guid="4eb70c27e39c5494c9a481facd89d03c" Name="Assets/ClientApp/BuildResources/LuaScripts/test.lua.txt" Length="0" HashCode="0" />
+          <Asset Guid="789825b7ccf32b74ba468ed95d6cda71" Name="Assets/ClientApp/BuildResources/LuaScripts/main.lua.txt" Length="10" HashCode="1406573612" />
+        </Assets>
+        <Codes>
+          <StandaloneWindows Length="1074" HashCode="1501026258" ZipLength="910" ZipHashCode="810182945" />
+        </Codes>
+      </AssetBundle>
+      <AssetBundle Name="models/chuxinzhe_01/chuxinzhe_01" LoadType="0" Packed="False">
+        <Assets Count="2">
+          <Asset Guid="0fa9839dc5d66694dbfc71af7c0ffdd2" Name="Assets/ClientApp/BuildResources/Models/chuxinzhe_01/chuxinzhe_01.controller" Length="11636" HashCode="1701210192">
+            <DependencyAssets Count="4">
+              <DependencyAsset Name="Assets/ClientApp/BuildResources/Models/chuxinzhe_01/chuxinzhe_01.FBX" />
+              <DependencyAsset Name="Assets/ClientApp/BuildResources/Models/chuxinzhe_01/Materials/chuxinzhe_01.mat" />
+              <DependencyAsset Name="Assets/ClientApp/BuildResources/Models/chuxinzhe_01/Materials/weapon.mat" />
+              <DependencyAsset Name="Assets/ClientApp/BuildResources/Models/chuxinzhe_01/Materials/xinshou_01.mat" />
+            </DependencyAssets>
+          </Asset>
+          <Asset Guid="62ada8ae92e3aa140ad55d0668e5f660" Name="Assets/ClientApp/BuildResources/Models/chuxinzhe_01/chuxinzhe_01.FBX" Length="207264" HashCode="-1885934385" />
+        </Assets>
+        <Codes>
+          <StandaloneWindows Length="963907" HashCode="1882597363" ZipLength="861548" ZipHashCode="-1564069486" />
+        </Codes>
+      </AssetBundle>
+      <AssetBundle Name="models/chuxinzhe_01/chuxinzhe_02" LoadType="0" Packed="False">
+        <Assets Count="1">
+          <Asset Guid="2e559fd417d31b144baf766ffdfae07f" Name="Assets/ClientApp/BuildResources/Models/chuxinzhe_01/chuxinzhe_02.controller" Length="13472" HashCode="-1907913716">
+            <DependencyAssets Count="1">
+              <DependencyAsset Name="Assets/ClientApp/BuildResources/Models/chuxinzhe_01/chuxinzhe_01.FBX" />
+            </DependencyAssets>
+          </Asset>
+        </Assets>
+        <Codes>
+          <StandaloneWindows Length="52065" HashCode="1915738439" ZipLength="45630" ZipHashCode="-606398654" />
+        </Codes>
+      </AssetBundle>
+      <AssetBundle Name="models/chuxinzhe_01/chuxinzhe_03" LoadType="0" Packed="False">
+        <Assets Count="1">
+          <Asset Guid="14fa0e43329518a4fb520904dc15fcd9" Name="Assets/ClientApp/BuildResources/Models/chuxinzhe_01/chuxinzhe_03.controller" Length="13816" HashCode="-1096541471">
+            <DependencyAssets Count="1">
+              <DependencyAsset Name="Assets/ClientApp/BuildResources/Models/chuxinzhe_01/chuxinzhe_01.FBX" />
+            </DependencyAssets>
+          </Asset>
+        </Assets>
+        <Codes>
+          <StandaloneWindows Length="48822" HashCode="1797246281" ZipLength="42308" ZipHashCode="772467599" />
+        </Codes>
+      </AssetBundle>
+      <AssetBundle Name="models/chuxinzhe_01/materials/chuxinzhe_01" LoadType="0" Packed="False">
+        <Assets Count="2">
+          <Asset Guid="90bfb7e4d00e3bd438e2716d352fa043" Name="Assets/ClientApp/BuildResources/Models/chuxinzhe_01/Materials/chuxinzhe_01.tga" Length="786476" HashCode="750332918" />
+          <Asset Guid="d73116a36c53c8e48b4cf67a3e4c4671" Name="Assets/ClientApp/BuildResources/Models/chuxinzhe_01/Materials/chuxinzhe_01.mat" Length="5632" HashCode="-2072676361">
+            <DependencyAssets Count="1">
+              <DependencyAsset Name="Assets/ClientApp/BuildResources/Models/chuxinzhe_01/Materials/chuxinzhe_01.tga" />
+            </DependencyAssets>
+          </Asset>
+        </Assets>
+        <Codes>
+          <StandaloneWindows Length="135667" HashCode="1490647580" ZipLength="116606" ZipHashCode="1735041336" />
+        </Codes>
+      </AssetBundle>
+      <AssetBundle Name="models/chuxinzhe_01/materials/weapon" LoadType="0" Packed="False">
+        <Assets Count="2">
+          <Asset Guid="9ef807c704cf3444aa6f3c166e98dc89" Name="Assets/ClientApp/BuildResources/Models/chuxinzhe_01/Materials/weapon.psd" Length="329313" HashCode="1982501053" />
+          <Asset Guid="ddbec34b1fbdf234d9979b7b8e7a0559" Name="Assets/ClientApp/BuildResources/Models/chuxinzhe_01/Materials/weapon.mat" Length="5620" HashCode="1906390843" />
+        </Assets>
+        <Codes>
+          <StandaloneWindows Length="67242" HashCode="1669725838" ZipLength="56025" ZipHashCode="1708982407" />
+        </Codes>
+      </AssetBundle>
+      <AssetBundle Name="models/chuxinzhe_01/materials/xinshou_01" LoadType="0" Packed="False">
+        <Assets Count="1">
+          <Asset Guid="c5c60ae3684b0cd45af6b0b1a168bdb1" Name="Assets/ClientApp/BuildResources/Models/chuxinzhe_01/Materials/xinshou_01.mat" Length="5020" HashCode="263606518" />
+        </Assets>
+        <Codes>
+          <StandaloneWindows Length="56094" HashCode="-101269187" ZipLength="45617" ZipHashCode="794836986" />
+        </Codes>
+      </AssetBundle>
+      <AssetBundle Name="models/prefabs/chuxinzhe_01" LoadType="0" Packed="False">
+        <Assets Count="1">
+          <Asset Guid="e6f0faf17fbcd924e9cede0f8f061960" Name="Assets/ClientApp/BuildResources/Models/Prefabs/chuxinzhe_01.prefab" Length="25452" HashCode="-404949247">
+            <DependencyAssets Count="3">
+              <DependencyAsset Name="Assets/ClientApp/BuildResources/Models/chuxinzhe_01/chuxinzhe_01.controller" />
+              <DependencyAsset Name="Assets/ClientApp/BuildResources/Models/chuxinzhe_01/chuxinzhe_01.FBX" />
+              <DependencyAsset Name="Assets/ClientApp/BuildResources/Models/chuxinzhe_01/Materials/chuxinzhe_01.mat" />
+            </DependencyAssets>
+          </Asset>
+        </Assets>
+        <Codes>
+          <StandaloneWindows Length="8319" HashCode="-1376632747" ZipLength="7395" ZipHashCode="-1449221840" />
+        </Codes>
+      </AssetBundle>
+      <AssetBundle Name="models/prefabs/chuxinzhe_02" LoadType="0" Packed="False">
+        <Assets Count="1">
+          <Asset Guid="fb0d683c0e586ad49a14ce1c87ff697d" Name="Assets/ClientApp/BuildResources/Models/Prefabs/chuxinzhe_02.prefab" Length="34252" HashCode="-1084250887">
+            <DependencyAssets Count="3">
+              <DependencyAsset Name="Assets/ClientApp/BuildResources/Models/chuxinzhe_01/chuxinzhe_01.FBX" />
+              <DependencyAsset Name="Assets/ClientApp/BuildResources/Models/chuxinzhe_01/chuxinzhe_02.controller" />
+              <DependencyAsset Name="Assets/ClientApp/BuildResources/Models/chuxinzhe_01/Materials/chuxinzhe_01.mat" />
+            </DependencyAssets>
+          </Asset>
+        </Assets>
+        <Codes>
+          <StandaloneWindows Length="8724" HashCode="-2015391770" ZipLength="7763" ZipHashCode="-1985442513" />
+        </Codes>
+      </AssetBundle>
+      <AssetBundle Name="models/prefabs/chuxinzhe_03" LoadType="0" Packed="False">
+        <Assets Count="1">
+          <Asset Guid="f914a9e6804f14246839dfc904756a26" Name="Assets/ClientApp/BuildResources/Models/Prefabs/chuxinzhe_03.prefab" Length="34252" HashCode="1470304277">
+            <DependencyAssets Count="3">
+              <DependencyAsset Name="Assets/ClientApp/BuildResources/Models/chuxinzhe_01/chuxinzhe_01.FBX" />
+              <DependencyAsset Name="Assets/ClientApp/BuildResources/Models/chuxinzhe_01/chuxinzhe_03.controller" />
+              <DependencyAsset Name="Assets/ClientApp/BuildResources/Models/chuxinzhe_01/Materials/chuxinzhe_01.mat" />
+            </DependencyAssets>
+          </Asset>
+        </Assets>
+        <Codes>
+          <StandaloneWindows Length="8717" HashCode="-1893842720" ZipLength="7717" ZipHashCode="-80137504" />
+        </Codes>
+      </AssetBundle>
+    </AssetBundles>
+  </BuildReport>
+</UnityGameFramework>

@@ -1,0 +1,47 @@
+ManifestFileVersion: 0
+CRC: 4089379026
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: luascripts/_
+      Dependencies: {}
+    Info_1:
+      Name: models/chuxinzhe_01/chuxinzhe_01
+      Dependencies:
+        Dependency_0: models/chuxinzhe_01/materials/chuxinzhe_01
+        Dependency_1: models/chuxinzhe_01/materials/weapon
+        Dependency_2: models/chuxinzhe_01/materials/xinshou_01
+    Info_2:
+      Name: models/chuxinzhe_01/chuxinzhe_02
+      Dependencies:
+        Dependency_0: models/chuxinzhe_01/chuxinzhe_01
+    Info_3:
+      Name: models/chuxinzhe_01/chuxinzhe_03
+      Dependencies:
+        Dependency_0: models/chuxinzhe_01/chuxinzhe_01
+    Info_4:
+      Name: models/chuxinzhe_01/materials/chuxinzhe_01
+      Dependencies: {}
+    Info_5:
+      Name: models/chuxinzhe_01/materials/weapon
+      Dependencies: {}
+    Info_6:
+      Name: models/chuxinzhe_01/materials/xinshou_01
+      Dependencies: {}
+    Info_7:
+      Name: models/prefabs/chuxinzhe_01
+      Dependencies:
+        Dependency_0: models/chuxinzhe_01/chuxinzhe_01
+        Dependency_1: models/chuxinzhe_01/materials/chuxinzhe_01
+    Info_8:
+      Name: models/prefabs/chuxinzhe_02
+      Dependencies:
+        Dependency_0: models/chuxinzhe_01/chuxinzhe_01
+        Dependency_1: models/chuxinzhe_01/chuxinzhe_02
+        Dependency_2: models/chuxinzhe_01/materials/chuxinzhe_01
+    Info_9:
+      Name: models/prefabs/chuxinzhe_03
+      Dependencies:
+        Dependency_0: models/chuxinzhe_01/chuxinzhe_01
+        Dependency_1: models/chuxinzhe_01/chuxinzhe_03
+        Dependency_2: models/chuxinzhe_01/materials/chuxinzhe_01

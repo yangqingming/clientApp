@@ -1,0 +1,21 @@
+ManifestFileVersion: 0
+CRC: 398759579
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 2e65bcf6f78f119f59be644b5dcb5365
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: cc983a3149e5fb03ce027e70c7a1a559
+HashAppended: 0
+ClassTypes:
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+Assets:
+- Assets/ClientApp/BuildResources/Models/chuxinzhe_01/Materials/chuxinzhe_01.mat
+- Assets/ClientApp/BuildResources/Models/chuxinzhe_01/Materials/chuxinzhe_01.tga
+Dependencies: []
