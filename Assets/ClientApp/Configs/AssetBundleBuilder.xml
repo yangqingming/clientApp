@@ -6,7 +6,7 @@
       <WindowsSelected>True</WindowsSelected>
       <MacOSXSelected>False</MacOSXSelected>
       <IOSSelected>False</IOSSelected>
-      <AndroidSelected>False</AndroidSelected>
+      <AndroidSelected>True</AndroidSelected>
       <WindowsStoreSelected>False</WindowsStoreSelected>
       <ZipSelected>True</ZipSelected>
       <RecordScatteredDependencyAssetsSelected>False</RecordScatteredDependencyAssetsSelected>
@@ -17,8 +17,7 @@
       <IgnoreTypeTreeChangesSelected>False</IgnoreTypeTreeChangesSelected>
       <AppendHashToAssetBundleNameSelected>False</AppendHashToAssetBundleNameSelected>
       <ChunkBasedCompressionSelected>False</ChunkBasedCompressionSelected>
-      <BuildEventHandlerTypeName>
-      </BuildEventHandlerTypeName>
+      <BuildEventHandlerTypeName>BuildABPackageEventHandler</BuildEventHandlerTypeName>
       <OutputDirectory>E:/projects/clientApp/OutputAssetbundle</OutputDirectory>
     </Settings>
   </AssetBundleBuilder>
