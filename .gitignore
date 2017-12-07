@@ -3,6 +3,7 @@
 /apk
 /ab
 /UnityPackageManager
+/Assets/StreamingAssets/*
 OutputAssetbundle/*
 *.csproj
 *.vs
