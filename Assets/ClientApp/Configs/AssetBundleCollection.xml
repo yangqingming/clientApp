@@ -2,6 +2,7 @@
 <UnityGameFramework>
   <AssetBundleCollection>
     <AssetBundles>
+      <AssetBundle Name="LuaScripts/_" LoadType="0" Packed="False" />
       <AssetBundle Name="Models/chuxinzhe_01/chuxinzhe_01" LoadType="0" Packed="False" />
       <AssetBundle Name="Models/chuxinzhe_01/chuxinzhe_02" LoadType="0" Packed="False" />
       <AssetBundle Name="Models/chuxinzhe_01/chuxinzhe_03" LoadType="0" Packed="False" />
@@ -16,7 +17,9 @@
       <Asset Guid="0fa9839dc5d66694dbfc71af7c0ffdd2" AssetBundleName="Models/chuxinzhe_01/chuxinzhe_01" />
       <Asset Guid="14fa0e43329518a4fb520904dc15fcd9" AssetBundleName="Models/chuxinzhe_01/chuxinzhe_03" />
       <Asset Guid="2e559fd417d31b144baf766ffdfae07f" AssetBundleName="Models/chuxinzhe_01/chuxinzhe_02" />
+      <Asset Guid="4eb70c27e39c5494c9a481facd89d03c" AssetBundleName="LuaScripts/_" />
       <Asset Guid="62ada8ae92e3aa140ad55d0668e5f660" AssetBundleName="Models/chuxinzhe_01/chuxinzhe_01" />
+      <Asset Guid="789825b7ccf32b74ba468ed95d6cda71" AssetBundleName="LuaScripts/_" />
       <Asset Guid="90bfb7e4d00e3bd438e2716d352fa043" AssetBundleName="Models/chuxinzhe_01/Materials/chuxinzhe_01" />
       <Asset Guid="9ef807c704cf3444aa6f3c166e98dc89" AssetBundleName="Models/chuxinzhe_01/Materials/weapon" />
       <Asset Guid="c5c60ae3684b0cd45af6b0b1a168bdb1" AssetBundleName="Models/chuxinzhe_01/Materials/xinshou_01" />
