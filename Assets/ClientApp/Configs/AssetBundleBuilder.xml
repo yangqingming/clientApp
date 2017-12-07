@@ -6,7 +6,7 @@
       <WindowsSelected>True</WindowsSelected>
       <MacOSXSelected>False</MacOSXSelected>
       <IOSSelected>False</IOSSelected>
-      <AndroidSelected>False</AndroidSelected>
+      <AndroidSelected>True</AndroidSelected>
       <WindowsStoreSelected>False</WindowsStoreSelected>
       <ZipSelected>True</ZipSelected>
       <RecordScatteredDependencyAssetsSelected>False</RecordScatteredDependencyAssetsSelected>
@@ -16,10 +16,9 @@
       <ForceRebuildAssetBundleSelected>False</ForceRebuildAssetBundleSelected>
       <IgnoreTypeTreeChangesSelected>False</IgnoreTypeTreeChangesSelected>
       <AppendHashToAssetBundleNameSelected>False</AppendHashToAssetBundleNameSelected>
-      <ChunkBasedCompressionSelected>True</ChunkBasedCompressionSelected>
-      <BuildEventHandlerTypeName>
-      </BuildEventHandlerTypeName>
-      <OutputDirectory>D:/project_gj/program/Game/ab</OutputDirectory>
+      <ChunkBasedCompressionSelected>False</ChunkBasedCompressionSelected>
+      <BuildEventHandlerTypeName>BuildABPackageEventHandler</BuildEventHandlerTypeName>
+      <OutputDirectory>E:/projects/clientApp/OutputAssetbundle</OutputDirectory>
     </Settings>
   </AssetBundleBuilder>
 </UnityGameFramework>

@@ -11,15 +11,17 @@ public class ProcedureMain : ProcedureBase
 {
     protected override void OnEnter(ProcedureOwner procedureOwner)
     {
-
-        ClientApp.Event.Subscribe(ShowEntitySuccessEventArgs.EventId, OnShowEntitySuccess);
-        ClientApp.Event.Subscribe(ShowEntityFailureEventArgs.EventId, OnShowEntityFail);
-        ClientApp.Entity.ShowEntity<MyEntity>(0, AssetUtility.GetModelsPath("chuxinzhe_01"), "Actor", this);
+        base.OnEnter(procedureOwner);
+        //ClientApp.Event.Subscribe(ShowEntitySuccessEventArgs.EventId, OnShowEntitySuccess);
+        //ClientApp.Event.Subscribe(ShowEntityFailureEventArgs.EventId, OnShowEntityFail);
+        //ClientApp.Entity.ShowEntity<MyEntity>(0, AssetUtility.GetModelsPath("chuxinzhe_01"), "Actor", this);
     }
 
     protected override void OnUpdate(ProcedureOwner procedureOwner, float elapseSeconds, float realElapseSeconds)
     {
-        
+        base.OnUpdate(procedureOwner, elapseSeconds, realElapseSeconds);
+
+        ChangeState<ProcedureLaunchLuaScripts>(procedureOwner);
     }
 
     void OnShowEntitySuccess(object sender, GameEventArgs e)
