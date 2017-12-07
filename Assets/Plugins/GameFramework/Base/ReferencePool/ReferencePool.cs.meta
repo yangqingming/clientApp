@@ -1,11 +1,6 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
 guid: bcacd5dce2f68864fb27cf50f3a0e0b5
-timeCreated: 1511965874
-=======
-guid: 3f331a0472e32ad4e8738ce682b5a9c7
-timeCreated: 1512029351
->>>>>>> 9ff86a7c11056995d332bd4815feba0b8f9e52db
+timeCreated: 1512655662
 licenseType: Pro
 MonoImporter:
   externalObjects: {}
