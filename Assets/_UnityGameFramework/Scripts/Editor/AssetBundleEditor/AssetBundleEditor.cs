@@ -5,7 +5,9 @@
 // Feedback: mailto:jiangyin@gameframework.cn
 //------------------------------------------------------------
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -485,6 +487,19 @@ namespace UnityGameFramework.Editor.AssetBundleTools
             {
                 if (GUILayout.Button(string.Format("<<< {0}", selectedSourceAssets.Count.ToString()), GUILayout.Width(80f)))
                 {
+
+                    var types = AppDomain.CurrentDomain.GetAssemblies()
+                        .SelectMany(a => a.GetTypes().Where(t => t.GetInterfaces().Contains(typeof(IAssetBundleSetting))))
+                        .ToArray();
+
+                    IAssetBundleSetting[] AssetbundleCls = new IAssetBundleSetting[types.Length];
+
+                    for (int i = 0; i < types.Length; ++i)
+                    {
+                        System.Type type = types[i];
+                        AssetbundleCls[i] = type.Assembly.CreateInstance(type.FullName) as IAssetBundleSetting;
+                    }
+
                     int index = 0;
                     int count = selectedSourceAssets.Count;
                     foreach (SourceAsset sourceAsset in selectedSourceAssets)
@@ -492,8 +507,16 @@ namespace UnityGameFramework.Editor.AssetBundleTools
                         EditorUtility.DisplayProgressBar("Add AssetBundles", string.Format("{0}/{1} processing...", (++index).ToString(), count.ToString()), (float)index / count);
                         int dotIndex = sourceAsset.FromRootPath.IndexOf('.');
                         string assetBundleName = dotIndex > 0 ? sourceAsset.FromRootPath.Substring(0, dotIndex) : sourceAsset.FromRootPath;
-                        AddAssetBundle(assetBundleName, null, false);
-                        AssetBundle assetBundle = m_Controller.GetAssetBundle(assetBundleName, null);
+                        string assetBundleVariant = null;
+                        bool packed = false;
+                        for (int i = 0; i < AssetbundleCls.Length; ++i)
+                        {
+                            AssetbundleCls[i].GetAssetBundleName(sourceAsset, ref assetBundleName, ref assetBundleVariant);
+                            AssetbundleCls[i].GetAssetBundlePacked(sourceAsset, ref packed);
+                        }
+                        AddAssetBundle(assetBundleName, assetBundleVariant, false);
+                        AssetBundle assetBundle = m_Controller.GetAssetBundle(assetBundleName, assetBundleVariant);
+                        assetBundle.SetPacked(packed);
                         if (assetBundle == null)
                         {
                             continue;
