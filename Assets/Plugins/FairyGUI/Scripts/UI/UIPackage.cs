@@ -1152,7 +1152,7 @@ namespace FairyGUI
 			if (_resBundle != null)
 			{
 #if (UNITY_5 || UNITY_5_3_OR_NEWER)
-				tex = _resBundle.LoadAsset<Texture2D>(filePath);
+                tex = _resBundle.LoadAsset<Texture2D>(filePath);
 #else
 				tex = (Texture2D)_resBundle.Load(filePath, typeof(Texture2D));
 #endif

@@ -516,12 +516,12 @@ namespace UnityGameFramework.Editor.AssetBundleTools
                         }
                         AddAssetBundle(assetBundleName, assetBundleVariant, false);
                         AssetBundle assetBundle = m_Controller.GetAssetBundle(assetBundleName, assetBundleVariant);
-                        assetBundle.SetPacked(packed);
+                        
                         if (assetBundle == null)
                         {
                             continue;
                         }
-
+                        assetBundle.SetPacked(packed);
                         AssignAsset(sourceAsset, assetBundle);
                     }
 

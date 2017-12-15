@@ -12,4 +12,14 @@ public static class AssetUtility {
     {
         return string.Format("Assets/ClientApp/BuildResources/LuaScripts/{0}.lua.txt", assetName);
     }
+
+    public static string GetUIBytesPath(string assetName)
+    {
+        return string.Format("Assets/ClientApp/BuildResources/UI/{0}.bytes", assetName);
+    }
+
+    public static string GetUIAtlasPath(string assetName)
+    {
+        return string.Format("Assets/ClientApp/BuildResources/UI/{0}.png", assetName);
+    }
 }
