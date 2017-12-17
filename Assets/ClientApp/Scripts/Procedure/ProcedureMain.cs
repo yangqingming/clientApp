@@ -11,10 +11,16 @@ public class ProcedureMain : ProcedureBase
 {
     protected override void OnEnter(ProcedureOwner procedureOwner)
     {
+<<<<<<< HEAD
         base.OnEnter(procedureOwner);
         //ClientApp.Event.Subscribe(ShowEntitySuccessEventArgs.EventId, OnShowEntitySuccess);
         //ClientApp.Event.Subscribe(ShowEntityFailureEventArgs.EventId, OnShowEntityFail);
         //ClientApp.Entity.ShowEntity<MyEntity>(0, AssetUtility.GetModelsPath("chuxinzhe_01"), "Actor", this);
+=======
+        ClientApp.Event.Subscribe(ShowEntitySuccessEventArgs.EventId, OnShowEntitySuccess);
+        ClientApp.Event.Subscribe(ShowEntityFailureEventArgs.EventId, OnShowEntityFail);
+        ClientApp.Entity.ShowEntity<MyEntity>(0, AssetUtility.GetModelsPath("chuxinzhe_01"), "Actor", this);
+>>>>>>> 18782e00c7650ae4035ba9eb418dba9ad498fe0d
     }
 
     protected override void OnUpdate(ProcedureOwner procedureOwner, float elapseSeconds, float realElapseSeconds)
