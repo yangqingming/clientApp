@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
@@ -44,7 +45,9 @@ namespace UnityGameFramework.Editor.AssetBundleTools
         private int m_CurrentAssetBundleContentCount = 0;
         private int m_CurrentAssetBundleRowOnDraw = 0;
         private int m_CurrentSourceRowOnDraw = 0;
-
+        private string[] m_assetBundleSettingNames = null;
+        private int[] m_assetBundleSettingNamesIndex = null;
+        private int m_assetBundleSettingNamesSelectIndex = 0;
         [MenuItem("Game Framework/AssetBundle Tools/AssetBundle Editor", false, 32)]
         private static void Open()
         {
@@ -86,6 +89,18 @@ namespace UnityGameFramework.Editor.AssetBundleTools
             m_CurrentAssetBundleContentCount = 0;
             m_CurrentAssetBundleRowOnDraw = 0;
             m_CurrentSourceRowOnDraw = 0;
+
+            var types = AppDomain.CurrentDomain.GetAssemblies()
+                       .SelectMany(a => a.GetTypes().Where(t => t.GetInterfaces().Contains(typeof(IAssetBundleSetting))))
+                       .ToArray();
+            m_assetBundleSettingNames = new string[types.Length];
+            m_assetBundleSettingNamesIndex = new int[types.Length];
+            for (int i = 0; i < types.Length; ++i)
+            {
+                System.Type type = types[i];
+                m_assetBundleSettingNames[i] = type.FullName;
+                m_assetBundleSettingNamesIndex[i] = i;
+            }
 
             if (m_Controller.Load())
             {
@@ -488,16 +503,24 @@ namespace UnityGameFramework.Editor.AssetBundleTools
                 if (GUILayout.Button(string.Format("<<< {0}", selectedSourceAssets.Count.ToString()), GUILayout.Width(80f)))
                 {
 
-                    var types = AppDomain.CurrentDomain.GetAssemblies()
-                        .SelectMany(a => a.GetTypes().Where(t => t.GetInterfaces().Contains(typeof(IAssetBundleSetting))))
-                        .ToArray();
+                    //var types = AppDomain.CurrentDomain.GetAssemblies()
+                    //    .SelectMany(a => a.GetTypes().Where(t => t.GetInterfaces().Contains(typeof(IAssetBundleSetting))))
+                    //    .ToArray();
 
-                    IAssetBundleSetting[] AssetbundleCls = new IAssetBundleSetting[types.Length];
+                    //IAssetBundleSetting[] AssetbundleCls = new IAssetBundleSetting[types.Length];
 
-                    for (int i = 0; i < types.Length; ++i)
+                    //for (int i = 0; i < types.Length; ++i)
+                    //{
+                    //    System.Type type = types[i];
+                    //    AssetbundleCls[i] = type.Assembly.CreateInstance(type.FullName) as IAssetBundleSetting;
+                    //}
+
+                    IAssetBundleSetting setting = null;
+
+                    if (m_assetBundleSettingNames.Length > 0)
                     {
-                        System.Type type = types[i];
-                        AssetbundleCls[i] = type.Assembly.CreateInstance(type.FullName) as IAssetBundleSetting;
+                        Assembly assembly = Assembly.GetExecutingAssembly();
+                        setting = assembly.CreateInstance(m_assetBundleSettingNames[m_assetBundleSettingNamesSelectIndex]) as IAssetBundleSetting;
                     }
 
                     int index = 0;
@@ -509,10 +532,10 @@ namespace UnityGameFramework.Editor.AssetBundleTools
                         string assetBundleName = dotIndex > 0 ? sourceAsset.FromRootPath.Substring(0, dotIndex) : sourceAsset.FromRootPath;
                         string assetBundleVariant = null;
                         bool packed = false;
-                        for (int i = 0; i < AssetbundleCls.Length; ++i)
+                        if (setting != null)
                         {
-                            AssetbundleCls[i].GetAssetBundleName(sourceAsset, ref assetBundleName, ref assetBundleVariant);
-                            AssetbundleCls[i].GetAssetBundlePacked(sourceAsset, ref packed);
+                            setting.GetAssetBundleName(sourceAsset, ref assetBundleName, ref assetBundleVariant);
+                            setting.GetAssetBundlePacked(sourceAsset, ref packed);
                         }
                         AddAssetBundle(assetBundleName, assetBundleVariant, false);
                         AssetBundle assetBundle = m_Controller.GetAssetBundle(assetBundleName, assetBundleVariant);
@@ -533,6 +556,13 @@ namespace UnityGameFramework.Editor.AssetBundleTools
                 }
             }
             EditorGUI.EndDisabledGroup();
+
+            EditorGUI.BeginDisabledGroup(false);
+            {
+                m_assetBundleSettingNamesSelectIndex = EditorGUILayout.IntPopup("assetBundleSetting", m_assetBundleSettingNamesSelectIndex, m_assetBundleSettingNames, m_assetBundleSettingNamesIndex);
+            }
+            EditorGUI.EndDisabledGroup();
+
             bool hideAssignedSourceAssets = EditorGUILayout.ToggleLeft("Hide Assigned", m_HideAssignedSourceAssets, GUILayout.Width(100f));
             if (hideAssignedSourceAssets != m_HideAssignedSourceAssets)
             {
