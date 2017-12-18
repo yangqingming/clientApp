@@ -9,4 +9,6 @@ interface IAssetBundleSetting
     void GetAssetBundleName(SourceAsset source, ref string AssetBundleName, ref string assetBundleVariant);
     //设置资源在更新模式下是否在包内
     void GetAssetBundlePacked(SourceAsset source, ref bool packed);
+
+    void OnFinished(UnityGameFramework.Editor.AssetBundleTools.AssetBundle[] assetBundles);
 }

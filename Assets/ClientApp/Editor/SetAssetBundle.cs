@@ -86,27 +86,10 @@ namespace UnityGameFramework.Editor.AssetBundleTools
             }
         }
 
-        //private int GetAssetDependCount(string path)
-        //{
-        //    int startIndex = 0;
-        //    if (!string.IsNullOrEmpty(path))
-        //    {
-        //        string guid = AssetDatabase.AssetPathToGUID(path);
-        //        var withoutExtensions = new List<string>() { ".prefab", ".unity", ".mat", ".asset" };
-        //        string[] files = Directory.GetFiles(Application.dataPath, "*.*", SearchOption.AllDirectories)
-        //            .Where(s => withoutExtensions.Contains(Path.GetExtension(s).ToLower())).ToArray();
-               
-        //        for (int i = 0; i < files.Length; ++i)
-        //        {
-        //            string file = files[i];
-        //            if (Regex.IsMatch(File.ReadAllText(file), guid))
-        //            {
-        //                startIndex += 1;
-        //            }
-        //        }
-        //    }
-        //    return startIndex;
-        //}
+        public void OnFinished(UnityGameFramework.Editor.AssetBundleTools.AssetBundle[] assetBundles)
+        {
+
+        }
 
         public void GetAssetBundlePacked(SourceAsset source, ref bool packed)
         {

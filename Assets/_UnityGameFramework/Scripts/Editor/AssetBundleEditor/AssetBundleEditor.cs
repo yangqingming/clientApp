@@ -548,6 +548,10 @@ namespace UnityGameFramework.Editor.AssetBundleTools
                         AssignAsset(sourceAsset, assetBundle);
                     }
 
+                    AssetBundle[] assetBundles = m_Controller.GetAssetBundles();
+
+                    setting.OnFinished(assetBundles);
+
                     EditorUtility.DisplayProgressBar("Add AssetBundles", "Complete processing...", 1f);
                     RefreshAssetBundleTree();
                     EditorUtility.ClearProgressBar();
