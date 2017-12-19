@@ -41,13 +41,14 @@ namespace UnityGameFramework.Editor.AssetBundleTools
         private Vector2 m_SourceAssetsViewScroll = Vector2.zero;
         private string m_InputAssetBundleName = null;
         private string m_InputAssetBundleVariant = null;
-        private bool m_HideAssignedSourceAssets = false;
+        private bool m_HideAssignedSourceAssets = true;
         private int m_CurrentAssetBundleContentCount = 0;
         private int m_CurrentAssetBundleRowOnDraw = 0;
         private int m_CurrentSourceRowOnDraw = 0;
         private string[] m_assetBundleSettingNames = null;
         private int[] m_assetBundleSettingNamesIndex = null;
         private int m_assetBundleSettingNamesSelectIndex = 0;
+        private IAssetBundleSetting m_setting = null;
         [MenuItem("Game Framework/AssetBundle Tools/AssetBundle Editor", false, 32)]
         private static void Open()
         {
@@ -85,7 +86,7 @@ namespace UnityGameFramework.Editor.AssetBundleTools
             m_SourceAssetsViewScroll = Vector2.zero;
             m_InputAssetBundleName = null;
             m_InputAssetBundleVariant = null;
-            m_HideAssignedSourceAssets = false;
+            m_HideAssignedSourceAssets = true;
             m_CurrentAssetBundleContentCount = 0;
             m_CurrentAssetBundleRowOnDraw = 0;
             m_CurrentSourceRowOnDraw = 0;
@@ -102,6 +103,12 @@ namespace UnityGameFramework.Editor.AssetBundleTools
                 m_assetBundleSettingNamesIndex[i] = i;
             }
 
+            if (m_assetBundleSettingNames.Length > 0)
+            {
+                Assembly assembly = Assembly.GetExecutingAssembly();
+                m_setting = assembly.CreateInstance(m_assetBundleSettingNames[m_assetBundleSettingNamesSelectIndex]) as IAssetBundleSetting;
+            }
+
             if (m_Controller.Load())
             {
                 Debug.Log("Load configuration success.");
@@ -114,6 +121,11 @@ namespace UnityGameFramework.Editor.AssetBundleTools
             EditorUtility.DisplayProgressBar("Prepare AssetBundle Editor", "Processing...", 0f);
             RefreshAssetBundleTree();
             EditorUtility.ClearProgressBar();
+        }
+
+        private void OnDestroy()
+        {
+            
         }
 
         private void OnGUI()
@@ -502,19 +514,6 @@ namespace UnityGameFramework.Editor.AssetBundleTools
             {
                 if (GUILayout.Button(string.Format("<<< {0}", selectedSourceAssets.Count.ToString()), GUILayout.Width(80f)))
                 {
-
-                    //var types = AppDomain.CurrentDomain.GetAssemblies()
-                    //    .SelectMany(a => a.GetTypes().Where(t => t.GetInterfaces().Contains(typeof(IAssetBundleSetting))))
-                    //    .ToArray();
-
-                    //IAssetBundleSetting[] AssetbundleCls = new IAssetBundleSetting[types.Length];
-
-                    //for (int i = 0; i < types.Length; ++i)
-                    //{
-                    //    System.Type type = types[i];
-                    //    AssetbundleCls[i] = type.Assembly.CreateInstance(type.FullName) as IAssetBundleSetting;
-                    //}
-
                     IAssetBundleSetting setting = null;
 
                     if (m_assetBundleSettingNames.Length > 0)
@@ -547,23 +546,26 @@ namespace UnityGameFramework.Editor.AssetBundleTools
                         assetBundle.SetPacked(packed);
                         AssignAsset(sourceAsset, assetBundle);
                     }
-
-                    AssetBundle[] assetBundles = m_Controller.GetAssetBundles();
-
-                    setting.OnFinished(assetBundles);
-
+                    
                     EditorUtility.DisplayProgressBar("Add AssetBundles", "Complete processing...", 1f);
                     RefreshAssetBundleTree();
                     EditorUtility.ClearProgressBar();
                     m_SelectedSourceAssets.Clear();
                     m_CachedSelectedSourceFolders.Clear();
+
                 }
             }
             EditorGUI.EndDisabledGroup();
 
             EditorGUI.BeginDisabledGroup(false);
             {
-                m_assetBundleSettingNamesSelectIndex = EditorGUILayout.IntPopup("assetBundleSetting", m_assetBundleSettingNamesSelectIndex, m_assetBundleSettingNames, m_assetBundleSettingNamesIndex);
+                int tempIndex = EditorGUILayout.IntPopup("assetBundleSetting", m_assetBundleSettingNamesSelectIndex, m_assetBundleSettingNames, m_assetBundleSettingNamesIndex);
+                if (m_assetBundleSettingNamesSelectIndex != tempIndex)
+                {
+                    m_assetBundleSettingNamesSelectIndex = tempIndex;
+                    Assembly assembly = Assembly.GetExecutingAssembly();
+                    m_setting = assembly.CreateInstance(m_assetBundleSettingNames[m_assetBundleSettingNamesSelectIndex]) as IAssetBundleSetting;
+                }
             }
             EditorGUI.EndDisabledGroup();
 
@@ -823,6 +825,9 @@ namespace UnityGameFramework.Editor.AssetBundleTools
                 string assetBundleFullName = assetBundle.Variant != null ? string.Format("{0}.{1}", splitedPath[splitedPath.Length - 1], assetBundle.Variant) : splitedPath[splitedPath.Length - 1];
                 folder.AddItem(assetBundleFullName, assetBundle);
             }
+
+            if (m_setting != null)
+                m_setting.OnRefreshAssetBundle(assetBundles);
         }
 
         private bool IsExpandedAssetBundleFolder(AssetBundleFolder assetBundleFolder)

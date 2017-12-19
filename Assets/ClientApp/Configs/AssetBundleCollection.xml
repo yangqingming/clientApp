@@ -190,63 +190,64 @@
       <AssetBundle Name="Models/weapon/yinyangshi_weapon_05/yinyangshi_weapon_05" LoadType="0" Packed="False" />
       <AssetBundle Name="Models/weapon/yinyangshi_weapon_06/yinyangshi_weapon_06" LoadType="0" Packed="False" />
       <AssetBundle Name="Models/weapon/yinyangshi_weapon_07/yinyangshi_weapon_07" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/Bag.bytes" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/Bag.png" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/Basics.bytes" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/Basics.png" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/Basics.wav" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/BundleUsage.bytes" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/BundleUsage.png" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/Cooldown.bytes" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/Cooldown.png" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/Curve.bytes" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/Curve.png" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/CutScene.bytes" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/CutScene.png" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/EmitNumbers.bytes" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/EmitNumbers.png" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/Emoji.bytes" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/Emoji.png" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/Extension.bytes" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/Extension.png" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/Filter.bytes" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/Filter.png" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/Gesture.bytes" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/Guide.bytes" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/Guide.png" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/HeadBar.bytes" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/HeadBar.png" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/HitTest.bytes" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/HitTest.png" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/Joystick.bytes" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/Joystick.png" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/LoopList.bytes" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/LoopList.png" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/ModalWaiting.bytes" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/ModalWaiting.png" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/Model.bytes" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/Model.png" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/Particles.bytes" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/Particles.png" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/Perspective.bytes" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/Perspective.png" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/PullToRefresh.bytes" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/PullToRefresh.png" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/RenderTexture.bytes" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/RenderTexture.png" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/ScrollPane.bytes" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/ScrollPane.png" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/Transition.bytes" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/Transition.png" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/Transition.wav" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/TreeView.bytes" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/TreeView.png" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/TurnCard.bytes" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/TurnCard.png" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/TypingEffect.bytes" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/TypingEffect.png" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/VirtualList.bytes" LoadType="0" Packed="False" />
-      <AssetBundle Name="UI/VirtualList.png" LoadType="0" Packed="False" />
+      <AssetBundle Name="UI/Bag.bytes" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/Bag.png" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/Basics.bytes" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/Basics.png" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/Basics.wav" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/BundleUsage.bytes" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/BundleUsage.png" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/Cooldown.bytes" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/Cooldown.png" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/Curve.bytes" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/Curve.png" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/CutScene.bytes" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/CutScene.png" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/EmitNumbers.bytes" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/EmitNumbers.png" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/Emoji.bytes" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/Emoji.png" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/Extension.bytes" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/Extension.png" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/Filter.bytes" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/Filter.png" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/Gesture.bytes" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/Guide.bytes" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/Guide.png" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/HeadBar.bytes" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/HeadBar.png" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/HitTest.bytes" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/HitTest.png" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/Joystick.bytes" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/Joystick.png" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/LoopList.bytes" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/LoopList.png" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/ModalWaiting.bytes" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/ModalWaiting.png" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/Model.bytes" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/Model.png" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/Particles.bytes" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/Particles.png" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/Perspective.bytes" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/Perspective.png" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/PullToRefresh.bytes" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/PullToRefresh.png" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/RenderTexture.bytes" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/RenderTexture.png" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/ScrollPane.bytes" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/ScrollPane.png" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/Transition.bytes" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/Transition.png" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/Transition.wav" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/TreeView.bytes" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/TreeView.png" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/TurnCard.bytes" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/TurnCard.png" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/TypingEffect.bytes" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/TypingEffect.png" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/UIAssetConfig.bytes" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/VirtualList.bytes" LoadType="0" Packed="True" />
+      <AssetBundle Name="UI/VirtualList.png" LoadType="0" Packed="True" />
     </AssetBundles>
     <Assets>
       <Asset Guid="0043294a02a636a40ae497ea16083d77" AssetBundleName="UI/Model.bytes" />
@@ -610,6 +611,7 @@
       <Asset Guid="fa2ce52d8ac52a64a973032ed090e1c2" AssetBundleName="Models/role/role_anpeiqingming/zhandou_anpeiqingming_01.FBX" />
       <Asset Guid="fb0cd890f8220c046a59fc8bf590622e" AssetBundleName="Models/role/role_anpeiqingming/zhandou_anpeiqingming.FBX" />
       <Asset Guid="fb0d683c0e586ad49a14ce1c87ff697d" AssetBundleName="Models/Prefabs/chuxinzhe_02" />
+      <Asset Guid="fb8f37de0d0812446b35a43341a8d64f" AssetBundleName="UI/UIAssetConfig.bytes" />
       <Asset Guid="fc43439e4b365f347b6e422f24f16726" AssetBundleName="Models/role/role_zhandouqingxingdegn_01/zhandou_qingxingdeng_01.FBX" />
       <Asset Guid="fced6a97443b62d45891ef30cc20976e" AssetBundleName="Models/monster/monster_quanshen_01/monster_quanshen_01.FBX" />
       <Asset Guid="fd3a3f8f616a7a640a49517663d34825" AssetBundleName="UI/PullToRefresh.bytes" />

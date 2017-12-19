@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using GameFramework;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEngine;
+using LitJson;
 
 namespace UnityGameFramework.Editor.AssetBundleTools
 {
@@ -48,6 +50,9 @@ namespace UnityGameFramework.Editor.AssetBundleTools
                     addRef(depends[j]);
                 }
             }
+            if (!File.Exists("Assets/ClientApp/BuildResources/UI/UIAssetConfig.bytes"))
+                File.WriteAllText("Assets/ClientApp/BuildResources/UI/UIAssetConfig.bytes", "");
+            AssetDatabase.Refresh();
         }
 
         public void GetAssetBundleName(SourceAsset source, ref string AssetBundleName, ref string assetBundleVariant)
@@ -86,16 +91,43 @@ namespace UnityGameFramework.Editor.AssetBundleTools
             }
         }
 
-        public void OnFinished(UnityGameFramework.Editor.AssetBundleTools.AssetBundle[] assetBundles)
+        public void OnRefreshAssetBundle(UnityGameFramework.Editor.AssetBundleTools.AssetBundle[] assetBundles)
         {
+            Dictionary<string, List<string>> UIAssetConfig = new Dictionary<string, List<string>>();
+            for (int i = 0; i < assetBundles.Length; ++i)
+            {
+                string[] folder = assetBundles[i].FullName.Split('/');
+                if (folder.Length >= 2)
+                {
+                    if (folder[0] == "UI")
+                    {
+                        Asset[] assets = assetBundles[i].GetAssets();
 
+                        for (int j = 0; j < assets.Length; ++j)
+                        {
+                            string name = Path.GetFileNameWithoutExtension(assets[j].Name);
+                            string[] names = name.Split('@');
+                            if (!UIAssetConfig.ContainsKey(names[0]))
+                                UIAssetConfig.Add(names[0], new List<string>());
+
+                            if (!UIAssetConfig[names[0]].Contains(assets[j].Name))
+                                UIAssetConfig[names[0]].Add(assets[j].Name);
+                        }
+                    }
+                }
+            }
+
+            string json = JsonMapper.ToJson(UIAssetConfig);
+            File.WriteAllText("Assets/ClientApp/BuildResources/UI/UIAssetConfig.bytes", json);
+            AssetDatabase.Refresh();
         }
+
 
         public void GetAssetBundlePacked(SourceAsset source, ref bool packed)
         {
             string[] folder = source.Folder.FromRootPath.Split('/');
 
-            if (folder[0].CompareTo("LuaScripts") == 0)
+            if (folder[0].CompareTo("LuaScripts") == 0 || folder[0].CompareTo("UI") == 0)
             {
                 packed = true;
             }

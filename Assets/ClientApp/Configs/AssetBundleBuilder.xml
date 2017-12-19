@@ -17,7 +17,7 @@
       <IgnoreTypeTreeChangesSelected>False</IgnoreTypeTreeChangesSelected>
       <AppendHashToAssetBundleNameSelected>False</AppendHashToAssetBundleNameSelected>
       <ChunkBasedCompressionSelected>False</ChunkBasedCompressionSelected>
-      <BuildEventHandlerTypeName>BuildABPackageEventHandler</BuildEventHandlerTypeName>
+      <BuildEventHandlerTypeName>BuildABUpdateEventHandler</BuildEventHandlerTypeName>
       <OutputDirectory>E:/projects/clientApp/OutputAssetbundle</OutputDirectory>
     </Settings>
   </AssetBundleBuilder>
