@@ -130,6 +130,8 @@ public class ProcedureUpdate : ProcedureBase {
 
             Debug.Log(text.text);
 
+            var UIAssetConfig = GameFramework.Utility.Json.ToObject<Dictionary<string, List<string>>>(text.text);
+
             ClientApp.Resource.UnloadAsset(asset);
         };
 
