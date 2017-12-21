@@ -18,8 +18,7 @@ public class UIWindow : Window, IUISource
 
     public void Load(UILoadCallback callback)
     {
-        ClientApp.Resource.LoadAsset(AssetUtility.GetUIBytesPath(fileName), null);
-        ClientApp.Resource.LoadAsset(AssetUtility.GetUIBytesPath(fileName), null);
+        
     }
 #endregion
 

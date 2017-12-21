@@ -5,7 +5,6 @@ using UnityGameFramework.Runtime;
 
 public partial class ClientApp : MonoBehaviour
 {
-
     private void Start()
     {
         InitGameComponents();

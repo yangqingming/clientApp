@@ -65,7 +65,7 @@ public class ProcedureUpdate : ProcedureBase {
             }
         };
 
-        ClientApp.Resource.UpdatePrefixUri = "http://eltsres.gulugames.cn/test/";
+        ClientApp.Resource.UpdatePrefixUri = "http://eltsres.gulugames.cn/test/windows/";
         ClientApp.WebRequest.AddWebRequest(url, _event);
     }
 
@@ -124,18 +124,7 @@ public class ProcedureUpdate : ProcedureBase {
         MaxUpdateCount = args.UpdateCount;
         MaxLength = args.UpdateTotalZipLength;
 
-        GameFramework.Resource.LoadAssetSuccessCallback success = delegate (string assetName, object asset, float duration, object userData)
-        {
-            TextAsset text = asset as TextAsset;
-
-            Debug.Log(text.text);
-
-            var UIAssetConfig = GameFramework.Utility.Json.ToObject<Dictionary<string, List<string>>>(text.text);
-
-            ClientApp.Resource.UnloadAsset(asset);
-        };
-
-        ClientApp.Resource.LoadAsset(AssetUtility.GetUIBytesPath("UIAssetConfig"), new GameFramework.Resource.LoadAssetCallbacks(success));
+        ClientApp.UI.OpenUIForm(AssetUtility.GetUIPath("Bag"), "UI");
 
         //ClientApp.Resource.UpdateResources();
     }

@@ -43,15 +43,66 @@ namespace UnityGameFramework.Editor.AssetBundleTools
                 string resFolder = "Assets/";
                 int pos = file.IndexOf(resFolder);
                 string assetpath = file.Substring(pos);
-
+                 
                 string[] depends = AssetDatabase.GetDependencies(assetpath);
                 for (int j = 0; j < depends.Length; ++j)
                 {
                     addRef(depends[j]);
                 }
             }
-            if (!File.Exists("Assets/ClientApp/BuildResources/UI/UIAssetConfig.bytes"))
-                File.WriteAllText("Assets/ClientApp/BuildResources/UI/UIAssetConfig.bytes", "");
+            
+            files = Directory.GetFiles(GameFramework.Utility.Path.GetCombinePath(Application.dataPath, "ClientApp/BuildResources/UI"), "*.*", SearchOption.TopDirectoryOnly);
+
+            for (int i = 0; i < files.Length; ++i)
+            {
+                string file = files[i];
+                string resFolder = "Assets/";
+                int pos = file.IndexOf(resFolder);
+                string assetpath = file.Substring(pos);
+                string extension = Path.GetExtension(assetpath);
+                if (extension.CompareTo(".meta") != 0)
+                {
+                    string name = Path.GetFileNameWithoutExtension(assetpath);
+                    string[] names = name.Split('@');
+                    string prefabName = names[0];
+                    string newPrefabPathName = "Assets/ClientApp/BuildResources/UI/prefab/" + prefabName + ".prefab";
+                    GameObject prefab = null;
+                    if (!File.Exists(newPrefabPathName))
+                    {
+                        GameObject go = new GameObject();
+                        go.name = prefabName;
+
+                        prefab = PrefabUtility.CreatePrefab(newPrefabPathName, go);
+                        GameObject.DestroyImmediate(go);
+                    }
+                    else
+                    {
+                        prefab = AssetDatabase.LoadAssetAtPath<GameObject>(newPrefabPathName);
+                    }
+
+                    FairyGUIAssets assets = prefab.GetOrAddComponent<FairyGUIAssets>();
+                    if (extension == ".bytes")
+                    {
+                        TextAsset textAsset = AssetDatabase.LoadAssetAtPath<TextAsset>(assetpath);
+                        if (!assets.AllBytes.Contains(textAsset))
+                            assets.AllBytes.Add(textAsset);
+                    }
+                    else if (extension == ".png")
+                    {
+                        Texture texture = AssetDatabase.LoadAssetAtPath<Texture>(assetpath);
+                        if (!assets.AllTexture2D.Contains(texture))
+                            assets.AllTexture2D.Add(texture);
+                    }
+                    else if (extension == ".wav")
+                    {
+                        AudioClip audio = AssetDatabase.LoadAssetAtPath<AudioClip>(assetpath);
+                        if (!assets.AllAudioClip.Contains(audio))
+                            assets.AllAudioClip.Add(audio);
+
+                    }
+                }
+            }
+
             AssetDatabase.Refresh();
         }
 
@@ -93,33 +144,33 @@ namespace UnityGameFramework.Editor.AssetBundleTools
 
         public void OnRefreshAssetBundle(UnityGameFramework.Editor.AssetBundleTools.AssetBundle[] assetBundles)
         {
-            Dictionary<string, List<string>> UIAssetConfig = new Dictionary<string, List<string>>();
-            for (int i = 0; i < assetBundles.Length; ++i)
-            {
-                string[] folder = assetBundles[i].FullName.Split('/');
-                if (folder.Length >= 2)
-                {
-                    if (folder[0] == "UI")
-                    {
-                        Asset[] assets = assetBundles[i].GetAssets();
+            //Dictionary<string, List<string>> UIAssetConfig = new Dictionary<string, List<string>>();
+            //for (int i = 0; i < assetBundles.Length; ++i)
+            //{
+            //    string[] folder = assetBundles[i].FullName.Split('/');
+            //    if (folder.Length >= 2)
+            //    {
+            //        if (folder[0] == "UI")
+            //        {
+            //            Asset[] assets = assetBundles[i].GetAssets();
 
-                        for (int j = 0; j < assets.Length; ++j)
-                        {
-                            string name = Path.GetFileNameWithoutExtension(assets[j].Name);
-                            string[] names = name.Split('@');
-                            if (!UIAssetConfig.ContainsKey(names[0]))
-                                UIAssetConfig.Add(names[0], new List<string>());
+            //            for (int j = 0; j < assets.Length; ++j)
+            //            {
+            //                string name = Path.GetFileNameWithoutExtension(assets[j].Name);
+            //                string[] names = name.Split('@');
+            //                if (!UIAssetConfig.ContainsKey(names[0]))
+            //                    UIAssetConfig.Add(names[0], new List<string>());
 
-                            if (!UIAssetConfig[names[0]].Contains(assets[j].Name))
-                                UIAssetConfig[names[0]].Add(assets[j].Name);
-                        }
-                    }
-                }
-            }
+            //                if (!UIAssetConfig[names[0]].Contains(assets[j].Name))
+            //                    UIAssetConfig[names[0]].Add(assets[j].Name);
+            //            }
+            //        }
+            //    }
+            //}
 
-            string json = JsonMapper.ToJson(UIAssetConfig);
-            File.WriteAllText("Assets/ClientApp/BuildResources/UI/UIAssetConfig.bytes", json);
-            AssetDatabase.Refresh();
+            //string json = JsonMapper.ToJson(UIAssetConfig);
+            //File.WriteAllText("Assets/ClientApp/BuildResources/UI/UIAssetConfig.bytes", json);
+            //AssetDatabase.Refresh();
         }
 
 
