@@ -65,7 +65,7 @@ namespace UnityGameFramework.Editor.AssetBundleTools
                     string name = Path.GetFileNameWithoutExtension(assetpath);
                     string[] names = name.Split('@');
                     string prefabName = names[0];
-                    string newPrefabPathName = "Assets/ClientApp/BuildResources/UI/prefab/" + prefabName + ".prefab";
+                    string newPrefabPathName = "Assets/ClientApp/BuildResources/UI/Prefabs/" + prefabName + ".prefab";
                     GameObject prefab = null;
                     if (!File.Exists(newPrefabPathName))
                     {

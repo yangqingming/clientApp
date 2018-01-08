@@ -15,7 +15,7 @@ public static class AssetUtility {
 
     public static string GetUIPath(string assetName)
     {
-        return string.Format("Assets/ClientApp/BuildResources/UI/prefab/{0}.prefab", assetName);
+        return string.Format("Assets/ClientApp/BuildResources/UI/Prefabs/{0}.prefab", assetName);
     }
 
 }
